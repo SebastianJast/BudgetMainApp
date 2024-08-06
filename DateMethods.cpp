@@ -99,3 +99,18 @@ bool DateMethods::validateDate(string &date) {
     }
     return true;
 }
+
+int DateMethods::convertStringDateToInt(const string &dateAsStrig){
+
+    string strYear, strMonth, strDays, strDate;
+    int dateAsInt;
+
+    strYear = dateAsStrig.substr(0, 4);
+    strMonth = dateAsStrig.substr(5, 2);
+    strDays = dateAsStrig.substr(8, 2);
+
+    strDate = strYear + strMonth + strDays;
+    dateAsInt = stoi(strDate);
+
+    return dateAsInt;
+}

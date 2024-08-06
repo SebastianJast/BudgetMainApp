@@ -17,6 +17,7 @@ public:
     static void calculateCurrentDate(map<string, int>& currentDate);
     static bool isYearLeap(int year);
     static bool validateDate(string &date);
+    static int convertStringDateToInt(const string &dateAsStrig);
 
 };
 
