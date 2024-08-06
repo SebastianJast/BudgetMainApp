@@ -18,6 +18,7 @@ public:
     static bool isYearLeap(int year);
     static bool validateDate(string &date);
     static int convertStringDateToInt(const string &dateAsStrig);
+    static string convertIntDateToStringWithDashes(int dateAsInt);
 
 };
 

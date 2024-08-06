@@ -100,17 +100,33 @@ bool DateMethods::validateDate(string &date) {
     return true;
 }
 
-int DateMethods::convertStringDateToInt(const string &dateAsStrig){
+int DateMethods::convertStringDateToInt(const string &dateAsString){
 
     string strYear, strMonth, strDays, strDate;
     int dateAsInt;
 
-    strYear = dateAsStrig.substr(0, 4);
-    strMonth = dateAsStrig.substr(5, 2);
-    strDays = dateAsStrig.substr(8, 2);
+    strYear = dateAsString.substr(0, 4);
+    strMonth = dateAsString.substr(5, 2);
+    strDays = dateAsString.substr(8, 2);
 
     strDate = strYear + strMonth + strDays;
     dateAsInt = stoi(strDate);
 
     return dateAsInt;
+}
+
+string DateMethods::convertIntDateToStringWithDashes(int dateAsInt) {
+
+    string dateAsString, strYear, strMonth, strDays, dateAsStringWithDash;
+    stringstream ss;
+    ss << dateAsInt;
+    dateAsString = ss.str();
+
+    strYear = dateAsString.substr(0, 4);
+    strMonth = dateAsString.substr(4, 2);
+    strDays = dateAsString.substr(6, 2);
+
+    dateAsStringWithDash = strYear + "-" + strMonth + "-" + strDays;
+
+    return dateAsStringWithDash;
 }
