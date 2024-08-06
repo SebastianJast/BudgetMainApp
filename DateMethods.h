@@ -20,6 +20,7 @@ public:
     static int convertStringDateToInt(const string &dateAsStrig);
     static string convertIntDateToStringWithDashes(int dateAsInt);
     static int getCurrentDate();
+    static int getCurrentMonthFirstDayDate();
 
 };
 

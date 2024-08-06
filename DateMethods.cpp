@@ -156,3 +156,27 @@ int DateMethods::getCurrentDate(){
 
     return currentDateAsInt;
 }
+
+int DateMethods::getCurrentMonthFirstDayDate(){
+    map<string, int> currentDate;
+    calculateCurrentDate(currentDate);
+
+    string yearAsString, monthAsString, dayAsString, dateAsString;
+    int currentMonthFirstDayDate;
+
+    stringstream yearStream;
+    yearStream <<  currentDate["year"];
+    yearAsString = yearStream.str();
+
+    stringstream monthStream;
+    monthStream <<  (currentDate["month"] < 10 ? "0" : "") <<currentDate["month"];
+    monthAsString = monthStream.str();
+
+    dayAsString = "01";
+
+    dateAsString = yearAsString + monthAsString + dayAsString;
+
+    currentMonthFirstDayDate = stoi(dateAsString);
+
+    return currentMonthFirstDayDate;
+}
