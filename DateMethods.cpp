@@ -130,3 +130,29 @@ string DateMethods::convertIntDateToStringWithDashes(int dateAsInt) {
 
     return dateAsStringWithDash;
 }
+
+int DateMethods::getCurrentDate(){
+    map<string, int> currentDate;
+    calculateCurrentDate(currentDate);
+
+    string yearAsString, monthAsString, dayAsString, dateAsString;
+    int currentDateAsInt;
+
+    stringstream yearStream;
+    yearStream <<  currentDate["year"];
+    yearAsString = yearStream.str();
+
+    stringstream monthStream;
+    monthStream <<  (currentDate["month"] < 10 ? "0" : "") <<currentDate["month"];
+    monthAsString = monthStream.str();
+
+    stringstream dayStream;
+    dayStream <<  (currentDate["day"] < 10 ? "0" : "") << currentDate["day"];
+    dayAsString = dayStream.str();
+
+    dateAsString = yearAsString + monthAsString + dayAsString;
+
+    currentDateAsInt = stoi(dateAsString);
+
+    return currentDateAsInt;
+}
