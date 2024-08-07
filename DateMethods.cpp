@@ -159,7 +159,20 @@ int DateMethods::getCurrentDate(){
 
 int DateMethods::getCurrentMonthFirstDayDate(){
     map<string, int> currentDate;
-    calculateCurrentDate(currentDate);
+    auto currentTime = chrono::system_clock::now();
+    time_t currentDateTime = chrono::system_clock::to_time_t(currentTime);
+
+    tm currentTm;
+    localtime_s(&currentTm, &currentDateTime);
+
+    currentTm.tm_mday = 1;
+    currentTm.tm_hour = 0;
+    currentTm.tm_min = 0;
+    currentTm.tm_sec = 0;
+
+    currentDate["year"] = currentTm.tm_year + 1900;
+    currentDate["month"] = currentTm.tm_mon + 1;
+    currentDate["day"] = currentTm.tm_mday;
 
     string yearAsString, monthAsString, dayAsString, dateAsString;
     int currentMonthFirstDayDate;
@@ -172,11 +185,105 @@ int DateMethods::getCurrentMonthFirstDayDate(){
     monthStream <<  (currentDate["month"] < 10 ? "0" : "") <<currentDate["month"];
     monthAsString = monthStream.str();
 
-    dayAsString = "01";
+    stringstream dayStream;
+    dayStream <<  (currentDate["day"] < 10 ? "0" : "") << currentDate["day"];
+    dayAsString = dayStream.str();
+
 
     dateAsString = yearAsString + monthAsString + dayAsString;
 
     currentMonthFirstDayDate = stoi(dateAsString);
 
     return currentMonthFirstDayDate;
+}
+
+int DateMethods::getPreviousMonthLastDayDate(){
+    map<string, int> currentDate;
+    auto currentTime = chrono::system_clock::now();
+    time_t currentDateTime = chrono::system_clock::to_time_t(currentTime);
+
+    tm currentTm;
+    localtime_s(&currentTm, &currentDateTime);
+
+    currentTm.tm_mday = 1;
+    currentTm.tm_hour = 0;
+    currentTm.tm_min = 0;
+    currentTm.tm_sec = 0;
+
+    time_t lastday = mktime(&currentTm);
+    lastday -= 86400;
+    currentTm = *localtime(&lastday);
+
+    currentDate["year"] = currentTm.tm_year + 1900;
+    currentDate["month"] = currentTm.tm_mon + 1;
+    currentDate["day"] = currentTm.tm_mday;
+
+    string yearAsString, monthAsString, dayAsString, dateAsString;
+    int previousMonthLastDayDate;
+
+    stringstream yearStream;
+    yearStream <<  currentDate["year"];
+    yearAsString = yearStream.str();
+
+    stringstream monthStream;
+    monthStream <<  (currentDate["month"] < 10 ? "0" : "") <<currentDate["month"];
+    monthAsString = monthStream.str();
+
+    stringstream dayStream;
+    dayStream <<  (currentDate["day"] < 10 ? "0" : "") << currentDate["day"];
+    dayAsString = dayStream.str();
+
+    dateAsString = yearAsString + monthAsString + dayAsString;
+
+    previousMonthLastDayDate = stoi(dateAsString);
+
+    return previousMonthLastDayDate;
+}
+
+int DateMethods::getPreviousMonthFirstDayDate(){
+    map<string, int> currentDate;
+    auto currentTime = chrono::system_clock::now();
+    time_t currentDateTime = chrono::system_clock::to_time_t(currentTime);
+
+    tm currentTm;
+    localtime_s(&currentTm, &currentDateTime);
+
+    currentTm.tm_mday = 1;
+    currentTm.tm_hour = 0;
+    currentTm.tm_min = 0;
+    currentTm.tm_sec = 0;
+
+  if(currentTm.tm_mon == 0) {
+        currentTm.tm_mon = 11;
+        currentTm.tm_year -= 1;
+    } else {
+        currentTm.tm_mon -= 1;
+    }
+
+     mktime(&currentTm);
+
+    currentDate["year"] = currentTm.tm_year + 1900;
+    currentDate["month"] = currentTm.tm_mon + 1;
+    currentDate["day"] = currentTm.tm_mday;
+
+    string yearAsString, monthAsString, dayAsString, dateAsString;
+    int previousMonthFirstDayDate;
+
+    stringstream yearStream;
+    yearStream <<  currentDate["year"];
+    yearAsString = yearStream.str();
+
+    stringstream monthStream;
+    monthStream <<  (currentDate["month"] < 10 ? "0" : "") <<currentDate["month"];
+    monthAsString = monthStream.str();
+
+    stringstream dayStream;
+    dayStream <<  (currentDate["day"] < 10 ? "0" : "") << currentDate["day"];
+    dayAsString = dayStream.str();
+
+    dateAsString = yearAsString + monthAsString + dayAsString;
+
+    previousMonthFirstDayDate = stoi(dateAsString);
+
+    return previousMonthFirstDayDate;
 }

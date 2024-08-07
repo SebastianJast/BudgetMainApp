@@ -21,7 +21,8 @@ public:
     static string convertIntDateToStringWithDashes(int dateAsInt);
     static int getCurrentDate();
     static int getCurrentMonthFirstDayDate();
-
+    static int getPreviousMonthLastDayDate();
+    static int getPreviousMonthFirstDayDate();
 };
 
 #endif
