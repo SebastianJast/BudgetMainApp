@@ -46,12 +46,11 @@ char Utils::chooseOptionFromUserMenu(){
     system("cls");
     cout << " >>> USER MENU <<<" << endl;
     cout << "---------------------------" << endl;
-//    cout << "1. Add Contact" << endl;
-//    cout << "2. Search by First Name" << endl;
-//    cout << "3. Search by Last Name" << endl;
-//    cout << "4. Display Contacts" << endl;
-//    cout << "5. Delete Contact" << endl;
-//    cout << "6. Edit Contact" << endl;
+    cout << "1. Add Income" << endl;
+    cout << "2. Add expense" << endl;
+    cout << "3. Current month's balance" << endl;
+    cout << "5. Previous month's balance" << endl;
+    cout << "6. Selected period's balance" << endl;
     cout << "---------------------------" << endl;
     cout << "7. Change Password" << endl;
     cout << "8. Log Out" << endl;
