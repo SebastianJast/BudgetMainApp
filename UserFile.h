@@ -10,13 +10,15 @@
 
 using namespace std;
 
-class UserFile
+class UserFile {
+    const string FILE_NAME;
 
-{
 public:
+    UserFile(const string& userFileName) : FILE_NAME(userFileName) {};
+
     void appendUserToFile(const User &user);
     vector <User>loadUsersFromFile();
-    static void changePasswordInFile(int id, const string &password);
+    void changePasswordInFile(int id, const string &password);
 };
 
 #endif

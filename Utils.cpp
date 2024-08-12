@@ -61,4 +61,18 @@ char Utils::chooseOptionFromUserMenu(){
     return choice;
 }
 
+char Utils::chooseOptionFromIncomeMenu() {
+    char choice;
+
+    system("cls");
+    cout << " >>> INCOME MENU <<<" << endl;
+    cout << "---------------------------" << endl;
+    cout << "1. Add the income with today's date" << endl;
+    cout << "2. Add the income with a different date." << endl;
+    cout << "---------------------------" << endl;
+    cout << "Your choice: ";
+    choice = readChar();
+
+    return choice;
+}
 

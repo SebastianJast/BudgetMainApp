@@ -12,6 +12,7 @@ public:
     static char readChar();
     static char chooseOptionFromMainMenu();
     static char chooseOptionFromUserMenu();
+    static char chooseOptionFromIncomeMenu();
    };
 
 #endif

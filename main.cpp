@@ -6,20 +6,20 @@
 using namespace std;
 
 int main() {
-    int loggedInUserId = 0;
+    int loggedUserId = 0;
     char choice;
 
-    BudgetMainApp budgetMainApp;
+    BudgetMainApp budgetMainApp("users.xml", "incomes.xml", "expenses.xml" );
 
     while (true) {
-        if (loggedInUserId == 0) {
+        if (loggedUserId == 0) {
             choice = Utils::chooseOptionFromMainMenu();
             switch (choice) {
             case '1':
                 budgetMainApp.registerUser();
                 break;
             case '2':
-                loggedInUserId = budgetMainApp.loginUser();
+                loggedUserId = budgetMainApp.loginUser();
                 break;
             case '9':
                 budgetMainApp.logoutUser();
@@ -33,8 +33,10 @@ int main() {
             choice = Utils::chooseOptionFromUserMenu();
             switch (choice) {
             case '1':
+                budgetMainApp.addIncome();
                 break;
             case '2':
+                budgetMainApp.addExpense();
                 break;
             case '3':
                 break;
@@ -48,7 +50,7 @@ int main() {
                 budgetMainApp.changeUserPassword();
                 break;
             case '8':
-                loggedInUserId = 0;
+                loggedUserId = 0;
                 break;
             }
         }

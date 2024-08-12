@@ -78,8 +78,8 @@ int UserManager::loginUser() {
                 if (itr -> password == getPassword) {
                     cout << endl << "You have logged in." << endl << endl;
                     system("pause");
-                    loggedInUserId = itr -> id;
-                    return loggedInUserId;
+                    loggedUserId = itr -> id;
+                    return loggedUserId;
                 }
             }
             cout << "The incorrect password was entered 3 times." << endl;
@@ -100,7 +100,7 @@ void UserManager::changeUserPassword() {
 
     bool passwordChanged = false;
     for (vector<User>::iterator itr = users.begin(); itr != users.end(); itr++) {
-        if (itr->id == loggedInUserId) {
+        if (itr->id == loggedUserId) {
             itr->password = newPassword;
             passwordChanged = true;
             break;
@@ -108,7 +108,7 @@ void UserManager::changeUserPassword() {
     }
 
     if (passwordChanged) {
-        UserFile::changePasswordInFile(loggedInUserId, newPassword);
+     userFile.changePasswordInFile(loggedUserId, newPassword);
         cout << "The password has been changed." << endl << endl;
     } else {
         cout << "Error: User not found." << endl;
@@ -119,4 +119,8 @@ void UserManager::changeUserPassword() {
 
 void UserManager::logoutUser() {
     exit(0);
+}
+
+int UserManager::getLoggedUserId() {
+   return loggedUserId;
 }
