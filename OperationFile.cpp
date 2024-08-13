@@ -1,6 +1,5 @@
 #include "OperationFile.h"
 
-
 void OperationFile::addOperationToFileIncome(const Operation &income) {
 
     CMarkup xml;
@@ -20,7 +19,9 @@ void OperationFile::addOperationToFileIncome(const Operation &income) {
     xml.AddElem("userId", income.userId);
     xml.AddElem("date", income.date);
     xml.AddElem("item", income.item);
-    xml.AddElem("amount", income.amount);
+
+    string formattedAmount = Utils::formatToTwoDecimalPlaces(income.amount);
+    xml.AddElem("amount", formattedAmount);
 
     xml.Save(INCOME_FILE_NAME);
 }
@@ -56,7 +57,7 @@ vector <Operation> OperationFile::loadOperationsFromFileIncome(int loggedUserId)
             income.item = xml.GetData();
 
             xml.FindElem("amount");
-            income.amount = stoi(xml.GetData());
+            income.amount = stod(xml.GetData());
 
             incomes.push_back(income);
         }
@@ -84,7 +85,9 @@ void OperationFile::addOperationToFileExpense(const Operation &expense) {
     xml.AddElem("userId", expense.userId);
     xml.AddElem("date", expense.date);
     xml.AddElem("item", expense.item);
-    xml.AddElem("amount", expense.amount);
+
+    string formattedAmount = Utils::formatToTwoDecimalPlaces(expense.amount);
+    xml.AddElem("amount", formattedAmount);
 
     xml.Save(EXPENSE_FILE_NAME);
 }
@@ -120,7 +123,7 @@ vector <Operation> OperationFile::loadOperationsFromFileExpense(int loggedUserId
             expense.item = xml.GetData();
 
             xml.FindElem("amount");
-            expense.amount = stoi(xml.GetData());
+            expense.amount = stod(xml.GetData());
 
             expenses.push_back(expense);
         }
@@ -128,6 +131,4 @@ vector <Operation> OperationFile::loadOperationsFromFileExpense(int loggedUserId
     }
     return expenses;
 }
-
-
 

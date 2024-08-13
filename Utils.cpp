@@ -76,3 +76,11 @@ char Utils::chooseOptionFromIncomeMenu() {
     return choice;
 }
 
+string Utils::formatToTwoDecimalPlaces(double value) {
+   ostringstream oss;
+    oss << fixed << setprecision(2) << value;
+    return oss.str();
+}
+
+
+

@@ -32,14 +32,15 @@ Operation BudgetManager::enterIncomeData() {
     income.date = DateMethods::convertStringDateToInt(tempDate);
 
     cout << "Enter income name: ";
-   income.item = Utils::readLine();
+    income.item = Utils::readLine();
 
     do {
         cout << "Add income amount with up to two decimal places: ";
         tempAmount = Utils::readLine();
     } while (!CashMethods::validateAmount(tempAmount));
 
-   income.amount = stod(tempAmount);
+    tempAmount = CashMethods::formatAmount(tempAmount);
+    income.amount = stod(tempAmount);
 
 
     return income;
@@ -84,9 +85,24 @@ Operation BudgetManager::enterExpenseData() {
         tempAmount = Utils::readLine();
     } while (!CashMethods::validateAmount(tempAmount));
 
-   expense.amount = stod(tempAmount);
-
+    tempAmount = CashMethods::formatAmount(tempAmount);
+    expense.amount = stod(tempAmount);
 
     return expense;
 }
 
+void BudgetManager::showCurrentMonthBalance() {
+
+    cout << "Incomes for the current month:" << endl;
+    for (Operation& income : incomes) {
+        cout << "Date: " << DateMethods::convertIntDateToStringWithDashes(income.date) << ", Item: " << income.item << ", Amount: " << income.amount << endl;
+    }
+
+
+    cout << "Expenses for the current month:" << endl;
+    for (Operation& expense : expenses) {
+        cout << "Date: " << DateMethods::convertIntDateToStringWithDashes(expense.date) << ", Item: " << expense.item << ", Amount: " << expense.amount << endl;
+    }
+
+    system("pause");
+}

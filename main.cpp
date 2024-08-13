@@ -39,6 +39,7 @@ int main() {
                 budgetMainApp.addExpense();
                 break;
             case '3':
+                budgetMainApp.showCurrentMonthBalance();
                 break;
             case '4':
                 break;

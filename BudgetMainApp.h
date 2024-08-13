@@ -31,6 +31,7 @@ public:
     void logoutUser();
     void addIncome();
     void addExpense();
+    void showCurrentMonthBalance();
 
 };
 
