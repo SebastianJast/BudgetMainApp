@@ -53,3 +53,9 @@ void BudgetMainApp::showPreviousMonthBalance() {
 budgetManager->showPreviousMonthBalance();
 
 }
+
+void BudgetMainApp::showCustomPeriodBalance() {
+
+budgetManager->showCustomPeriodBalance();
+
+}

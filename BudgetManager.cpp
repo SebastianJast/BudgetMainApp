@@ -168,3 +168,55 @@ void BudgetManager::showPreviousMonthBalance() {
 
     system("pause");
 }
+
+void BudgetManager::showCustomPeriodBalance() {
+    double totalIncome = 0.0;
+    double totalExpense = 0.0;
+
+    string startDate, endDate;
+    int startDateInt, endDateInt;
+
+    do {
+        cout << "Enter start date (YYYY-MM-DD): ";
+        cin >> startDate;
+    } while (!DateMethods::validateDate(startDate));
+
+    do {
+        cout << "Enter end date (YYYY-MM-DD): ";
+        cin >> endDate;
+    } while (!DateMethods::validateDate(endDate));
+
+    startDateInt = DateMethods::convertStringDateToInt(startDate);
+    endDateInt = DateMethods::convertStringDateToInt(endDate);
+
+    cout << endl;
+    cout << "Incomes from " << startDate << " to " << endDate << ":" << endl;
+
+    for (Operation& income : incomes) {
+        int incomeDate = income.date;
+        if(incomeDate >= startDateInt && incomeDate <= endDateInt) {
+            cout << "Date: " << DateMethods::convertIntDateToStringWithDashes(incomeDate)
+                 << ", Item: " << income.item
+                 << ", Amount: " << income.amount << endl;
+            totalIncome += income.amount;
+        }
+    }
+
+    cout << "Total income: " << totalIncome << endl << endl;
+
+    cout << "Expenses from " << startDate << " to " << endDate << ":" << endl;
+
+    for (Operation& expense : expenses) {
+        int expenseDate = expense.date;
+        if(expenseDate >= startDateInt && expenseDate <= endDateInt) {
+            cout << "Date: " << DateMethods::convertIntDateToStringWithDashes(expenseDate)
+                 << ", Item: " << expense.item
+                 << ", Amount: " << expense.amount << endl;
+            totalExpense += expense.amount;
+        }
+    }
+
+    cout << "Total expense: " << totalExpense << endl << endl;
+
+    system("pause");
+}

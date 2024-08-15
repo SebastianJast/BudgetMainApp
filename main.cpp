@@ -45,6 +45,7 @@ int main() {
                 budgetMainApp.showPreviousMonthBalance();
                 break;
             case '5':
+                budgetMainApp.showCustomPeriodBalance();
                 break;
             case '6':
                 budgetMainApp.changeUserPassword();
