@@ -49,16 +49,38 @@ char Utils::chooseOptionFromUserMenu(){
     cout << "1. Add Income" << endl;
     cout << "2. Add expense" << endl;
     cout << "3. Current month's balance" << endl;
-    cout << "5. Previous month's balance" << endl;
-    cout << "6. Selected period's balance" << endl;
+    cout << "4. Previous month's balance" << endl;
+    cout << "5. Selected period's balance" << endl;
     cout << "---------------------------" << endl;
-    cout << "7. Change Password" << endl;
-    cout << "8. Log Out" << endl;
+    cout << "6. Change Password" << endl;
+    cout << "7. Log Out" << endl;
     cout << "---------------------------" << endl;
     cout << "Your choice: ";
     choice = readChar();
 
     return choice;
 }
+
+char Utils::chooseOptionFromIncomeMenu() {
+    char choice;
+
+    system("cls");
+    cout << " >>> INCOME MENU <<<" << endl;
+    cout << "---------------------------" << endl;
+    cout << "1. Add the income with today's date" << endl;
+    cout << "2. Add the income with a different date." << endl;
+    cout << "---------------------------" << endl;
+    cout << "Your choice: ";
+    choice = readChar();
+
+    return choice;
+}
+
+string Utils::formatToTwoDecimalPlaces(double value) {
+   ostringstream oss;
+    oss << fixed << setprecision(2) << value;
+    return oss.str();
+}
+
 
 

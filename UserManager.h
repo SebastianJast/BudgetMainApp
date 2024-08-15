@@ -12,7 +12,7 @@ using namespace std;
 
 class UserManager {
 
-    int loggedInUserId;
+    int loggedUserId;
     vector <User> users;
     UserFile userFile;
 
@@ -21,7 +21,8 @@ class UserManager {
     bool checkIfLoginExist(const string &login);
 
 public:
-    UserManager() {
+    UserManager(string userFileName) : userFile(userFileName) {
+    loggedUserId = 0;
     users = userFile.loadUsersFromFile();
     }
 
@@ -29,6 +30,7 @@ public:
     int loginUser();
     void changeUserPassword();
     void logoutUser();
+    int getLoggedUserId();
 
 };
 

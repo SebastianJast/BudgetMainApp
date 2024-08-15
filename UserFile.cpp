@@ -4,7 +4,7 @@ void UserFile::appendUserToFile(const User &user){
 
     CMarkup xml;
 
-    bool fileExists = xml.Load( "users.xml" );
+    bool fileExists = xml.Load(FILE_NAME);
 
     if (!fileExists) {
         xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
@@ -21,7 +21,7 @@ void UserFile::appendUserToFile(const User &user){
     xml.AddElem("Name", user.firstName);
     xml.AddElem("Surname", user.lastName);
 
-    xml.Save("users.xml");
+    xml.Save(FILE_NAME);
 };
 
 vector <User> UserFile::loadUsersFromFile() {
@@ -30,7 +30,7 @@ vector <User> UserFile::loadUsersFromFile() {
 
     CMarkup xml;
 
-    bool fileExists = xml.Load( "users.xml" );
+    bool fileExists = xml.Load(FILE_NAME);
 
     xml.ResetPos();
     xml.FindElem();
@@ -41,9 +41,6 @@ vector <User> UserFile::loadUsersFromFile() {
 
         xml.FindElem("UserId");
         user.id = stoi(xml.GetData());
-
-        xml.FindElem("Login");
-        user.login = xml.GetData();
 
         xml.FindElem("Login");
         user.login = xml.GetData();
@@ -66,7 +63,7 @@ vector <User> UserFile::loadUsersFromFile() {
 
 void UserFile::changePasswordInFile(int loggedId, const string &password) {
     CMarkup xml;
-    bool fileExists = xml.Load("users.xml");
+    bool fileExists = xml.Load(FILE_NAME);
 
   if (!fileExists) {
         xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
@@ -85,7 +82,7 @@ void UserFile::changePasswordInFile(int loggedId, const string &password) {
             xml.FindElem("Password");
             xml.RemoveElem();
             xml.AddElem("Password", password);
-            xml.Save("users.xml");
+            xml.Save(FILE_NAME);
             return;
         }
 

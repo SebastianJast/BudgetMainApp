@@ -3,6 +3,10 @@
 
 #include <iostream>
 #include <sstream>
+#include <cmath>
+#include <iomanip>
+#include <string>
+
 
 using namespace std;
 
@@ -12,6 +16,8 @@ public:
     static char readChar();
     static char chooseOptionFromMainMenu();
     static char chooseOptionFromUserMenu();
+    static char chooseOptionFromIncomeMenu();
+    static string formatToTwoDecimalPlaces(double value);
    };
 
 #endif
