@@ -49,11 +49,11 @@ char Utils::chooseOptionFromUserMenu(){
     cout << "1. Add Income" << endl;
     cout << "2. Add expense" << endl;
     cout << "3. Current month's balance" << endl;
-    cout << "5. Previous month's balance" << endl;
-    cout << "6. Selected period's balance" << endl;
+    cout << "4. Previous month's balance" << endl;
+    cout << "5. Selected period's balance" << endl;
     cout << "---------------------------" << endl;
-    cout << "7. Change Password" << endl;
-    cout << "8. Log Out" << endl;
+    cout << "6. Change Password" << endl;
+    cout << "7. Log Out" << endl;
     cout << "---------------------------" << endl;
     cout << "Your choice: ";
     choice = readChar();

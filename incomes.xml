@@ -70,4 +70,11 @@
 <item>car</item>
 <amount>300.30</amount>
 </Operation>
+<Operation>
+<id>11</id>
+<userId>1</userId>
+<date>20240711</date>
+<item>car</item>
+<amount>400.00</amount>
+</Operation>
 </Root>

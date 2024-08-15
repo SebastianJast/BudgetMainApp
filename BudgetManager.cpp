@@ -92,17 +92,79 @@ Operation BudgetManager::enterExpenseData() {
 }
 
 void BudgetManager::showCurrentMonthBalance() {
+    double totalIncome = 0.0;
+    double totalExpense = 0.0;
 
+    int currentMonthFirstDayDate = DateMethods::getCurrentMonthFirstDayDate();
+    int currentDate = DateMethods::getCurrentDate();
+
+    cout << endl;
     cout << "Incomes for the current month:" << endl;
+
     for (Operation& income : incomes) {
-        cout << "Date: " << DateMethods::convertIntDateToStringWithDashes(income.date) << ", Item: " << income.item << ", Amount: " << income.amount << endl;
+        int incomeDate = income.date;
+        if(incomeDate >= currentMonthFirstDayDate && incomeDate <= currentDate) {
+            cout << "Date: " << DateMethods::convertIntDateToStringWithDashes(incomeDate)
+                 << ", Item: " << income.item
+                 << ", Amount: " << income.amount << endl;
+            totalIncome += income.amount;
+        }
     }
 
+    cout << "Total income: " << totalIncome << endl << endl;
 
     cout << "Expenses for the current month:" << endl;
+
     for (Operation& expense : expenses) {
-        cout << "Date: " << DateMethods::convertIntDateToStringWithDashes(expense.date) << ", Item: " << expense.item << ", Amount: " << expense.amount << endl;
+        int expenseDate = expense.date;
+        if(expenseDate >= currentMonthFirstDayDate && expenseDate <= currentDate) {
+            cout << "Date: " << DateMethods::convertIntDateToStringWithDashes(expenseDate)
+                 << ", Item: " << expense.item
+                 << ", Amount: " << expense.amount << endl;
+            totalExpense += expense.amount;
+        }
     }
+
+    cout << "Total expense: " << totalExpense << endl << endl;
+
+    system("pause");
+}
+
+void BudgetManager::showPreviousMonthBalance() {
+    double totalIncome = 0.0;
+    double totalExpense = 0.0;
+
+    int previousMonthFirstDayDate = DateMethods::getPreviousMonthFirstDayDate();
+    int previousMonthLastDayDate = DateMethods::getPreviousMonthLastDayDate();
+
+    cout << endl;
+    cout << "Incomes for the current month:" << endl;
+
+    for (Operation& income : incomes) {
+        int incomeDate = income.date;
+        if(incomeDate >= previousMonthFirstDayDate && incomeDate <= previousMonthLastDayDate) {
+            cout << "Date: " << DateMethods::convertIntDateToStringWithDashes(incomeDate)
+                 << ", Item: " << income.item
+                 << ", Amount: " << income.amount << endl;
+            totalIncome += income.amount;
+        }
+    }
+
+    cout << "Total income: " << totalIncome << endl << endl;
+
+    cout << "Expenses for the current month:" << endl;
+
+    for (Operation& expense : expenses) {
+        int expenseDate = expense.date;
+        if(expenseDate >= previousMonthFirstDayDate && expenseDate <= previousMonthLastDayDate) {
+            cout << "Date: " << DateMethods::convertIntDateToStringWithDashes(expenseDate)
+                 << ", Item: " << expense.item
+                 << ", Amount: " << expense.amount << endl;
+            totalExpense += expense.amount;
+        }
+    }
+
+    cout << "Total expense: " << totalExpense << endl << endl;
 
     system("pause");
 }

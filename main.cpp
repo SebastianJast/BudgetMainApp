@@ -42,15 +42,14 @@ int main() {
                 budgetMainApp.showCurrentMonthBalance();
                 break;
             case '4':
+                budgetMainApp.showPreviousMonthBalance();
                 break;
             case '5':
                 break;
             case '6':
-                break;
-            case '7':
                 budgetMainApp.changeUserPassword();
                 break;
-            case '8':
+            case '7':
                 loggedUserId = 0;
                 break;
             }
