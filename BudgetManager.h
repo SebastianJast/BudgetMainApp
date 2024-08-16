@@ -9,7 +9,7 @@
 #include "Utils.h"
 #include "UserManager.h"
 #include "DateMethods.h"
-#include "OperationFile.h"
+#include "File.h"
 #include "CashMethods.h"
 
 using namespace std;
@@ -18,7 +18,7 @@ class BudgetManager {
     const int LOGGED_USER_ID;
     vector <Operation> incomes;
     vector <Operation> expenses;
-    OperationFile operationFile;
+    File operationFile;
 
     Operation enterIncomeData();
     Operation enterExpenseData();
