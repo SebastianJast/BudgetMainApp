@@ -1,10 +1,10 @@
 #include "OperationFile.h"
 
-void OperationFile::addOperationToFileIncome(const Operation &income) {
+void OperationFile::addOperationToFile(const Operation &operation) {
 
     CMarkup xml;
 
-    bool fileExists = xml.Load(INCOME_FILE_NAME);
+    bool fileExists = xml.Load(FILE_NAME);
 
     if (!fileExists) {
         xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
@@ -15,24 +15,24 @@ void OperationFile::addOperationToFileIncome(const Operation &income) {
     xml.IntoElem();
     xml.AddElem("Operation");
     xml.IntoElem();
-    xml.AddElem("id", income.id);
-    xml.AddElem("userId", income.userId);
-    xml.AddElem("date", income.date);
-    xml.AddElem("item", income.item);
+    xml.AddElem("id", operation.id);
+    xml.AddElem("userId", operation.userId);
+    xml.AddElem("date", operation.date);
+    xml.AddElem("item", operation.item);
 
-    string formattedAmount = Utils::formatToTwoDecimalPlaces(income.amount);
+    string formattedAmount = Utils::formatToTwoDecimalPlaces(operation.amount);
     xml.AddElem("amount", formattedAmount);
 
-    xml.Save(INCOME_FILE_NAME);
+    xml.Save(FILE_NAME);
 }
 
-vector <Operation> OperationFile::loadOperationsFromFileIncome(int loggedUserId) {
-    Operation income;
-    vector <Operation> incomes;
+vector <Operation> OperationFile::loadOperationsFromFile(int loggedUserId) {
+    Operation operation;
+    vector <Operation> operations;
 
     CMarkup xml;
 
-    bool fileExists = xml.Load(INCOME_FILE_NAME);
+    bool fileExists = xml.Load(FILE_NAME);
 
     xml.ResetPos();
     xml.FindElem();
@@ -42,93 +42,26 @@ vector <Operation> OperationFile::loadOperationsFromFileIncome(int loggedUserId)
         xml.IntoElem();
 
         xml.FindElem("id");
-        income.id = stoi(xml.GetData());
+        operation.id = stoi(xml.GetData());
 
         xml.FindElem("userId");
         int userId = stoi(xml.GetData());
 
         if(userId == loggedUserId) {
-            income.userId = userId;
+        operation.userId = userId;
 
             xml.FindElem("date");
-            income.date = stoi(xml.GetData());
+            operation.date = stoi(xml.GetData());
 
             xml.FindElem("item");
-            income.item = xml.GetData();
+            operation.item = xml.GetData();
 
             xml.FindElem("amount");
-            income.amount = stod(xml.GetData());
+            operation.amount = stod(xml.GetData());
 
-            incomes.push_back(income);
+            operations.push_back(operation);
         }
         xml.OutOfElem();
     }
-    return incomes;
+    return operations;
 }
-
-void OperationFile::addOperationToFileExpense(const Operation &expense) {
-
-    CMarkup xml;
-
-    bool fileExists = xml.Load(EXPENSE_FILE_NAME);
-
-    if (!fileExists) {
-        xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
-        xml.AddElem("Root");
-    }
-
-    xml.FindElem();
-    xml.IntoElem();
-    xml.AddElem("Operation");
-    xml.IntoElem();
-    xml.AddElem("id", expense.id);
-    xml.AddElem("userId", expense.userId);
-    xml.AddElem("date", expense.date);
-    xml.AddElem("item", expense.item);
-
-    string formattedAmount = Utils::formatToTwoDecimalPlaces(expense.amount);
-    xml.AddElem("amount", formattedAmount);
-
-    xml.Save(EXPENSE_FILE_NAME);
-}
-
-vector <Operation> OperationFile::loadOperationsFromFileExpense(int loggedUserId) {
-    Operation expense;
-    vector <Operation> expenses;
-
-    CMarkup xml;
-
-    bool fileExists = xml.Load(EXPENSE_FILE_NAME);
-
-    xml.ResetPos();
-    xml.FindElem();
-    xml.IntoElem();
-
-    while (xml.FindElem("Operation")) {
-        xml.IntoElem();
-
-        xml.FindElem("id");
-        expense.id = stoi(xml.GetData());
-
-        xml.FindElem("userId");
-        int userId = stoi(xml.GetData());
-
-        if(userId == loggedUserId) {
-            expense.userId = userId;
-
-            xml.FindElem("date");
-            expense.date = stoi(xml.GetData());
-
-            xml.FindElem("item");
-            expense.item = xml.GetData();
-
-            xml.FindElem("amount");
-            expense.amount = stod(xml.GetData());
-
-            expenses.push_back(expense);
-        }
-        xml.OutOfElem();
-    }
-    return expenses;
-}
-
