@@ -1,0 +1,8 @@
+bin/
+obj/
+plan/
+a_budget.*
+Markup.*
+users.xml
+expenses.xml
+incomes.xml
